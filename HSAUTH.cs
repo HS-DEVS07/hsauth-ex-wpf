@@ -44,7 +44,7 @@ namespace HSAUTH
         /// <summary>
         /// Initialize HS DEVS AUTH Application credentials (name, ownerid, secret, and version are all required)
         /// </summary>
-        public api(string name, string ownerid, string secret, string version, string apiUrl = "https://hsauth.mujahid.xyz/api/1.3/")
+        public api(string name, string ownerid, string secret, string version, string apiUrl = "https://auth.hsdevs.pro/api/1.3/")
         {
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(ownerid) || string.IsNullOrEmpty(secret))
             {
@@ -747,7 +747,7 @@ namespace HSAuth
 {
     public class api : HSAUTH.api
     {
-        public api(string name, string ownerid, string secret, string version, string apiUrl = "https://hsauth.mujahid.xyz/api/1.3/")
+        public api(string name, string ownerid, string secret, string version, string apiUrl = "https://auth.hsdevs.pro/api/1.3/")
             : base(name, ownerid, secret, version, apiUrl)
         {
         }
