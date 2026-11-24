@@ -42,13 +42,21 @@ namespace HSAUTH
         private bool heartbeatRunning = false;
 
         /// <summary>
-        /// Initialize HS DEVS AUTH Application credentials (name, ownerid, secret, and version are all required)
+        /// Initialize HS DEVS AUTH Application credentials
+        /// </summary>
+        public api(string name, string ownerid, string version, string apiUrl = "https://auth.hsdevs.pro/api/1.3/")
+            : this(name, ownerid, "", version, apiUrl)
+        {
+        }
+
+        /// <summary>
+        /// Initialize HS DEVS AUTH Application credentials (with secret)
         /// </summary>
         public api(string name, string ownerid, string secret, string version, string apiUrl = "https://auth.hsdevs.pro/api/1.3/")
         {
-            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(ownerid) || string.IsNullOrEmpty(secret))
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(ownerid))
             {
-                error("Application credentials (name, ownerid, and secret) are required and cannot be empty.");
+                error("Application credentials cannot be empty.");
             }
 
             this.name = name;
@@ -679,17 +687,6 @@ namespace HSAUTH
 
         private string req(NameValueCollection post_data)
         {
-            if (string.IsNullOrEmpty(secret))
-            {
-                error("Application secret is required.");
-                return "{\"success\":false,\"message\":\"Application secret is required\"}";
-            }
-
-            if (post_data["secret"] == null)
-            {
-                post_data["secret"] = secret;
-            }
-
             try
             {
                 using (WebClient client = new WebClient())
@@ -747,6 +744,11 @@ namespace HSAuth
 {
     public class api : HSAUTH.api
     {
+        public api(string name, string ownerid, string version, string apiUrl = "https://auth.hsdevs.pro/api/1.3/")
+            : base(name, ownerid, version, apiUrl)
+        {
+        }
+
         public api(string name, string ownerid, string secret, string version, string apiUrl = "https://auth.hsdevs.pro/api/1.3/")
             : base(name, ownerid, secret, version, apiUrl)
         {
